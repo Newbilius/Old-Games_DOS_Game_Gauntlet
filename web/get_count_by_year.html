@@ -1,0 +1,20 @@
+<html>
+<head>
+    <script src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<script>
+$(function() {
+	console.log( "ready!" );
+	var games;
+	$.getJSON( "https://raw.githubusercontent.com/Newbilius/Old-Games_DOS_Game_Gauntlet/master/GAMES.json", 
+		function( data ) {
+			games = data;
+			for (i=1981;i<2005;i++)
+				console.log(i+" "+data.filter(function(x){return x.Year==i}).length);
+		});
+
+});
+</script>
+</body>
+</html>

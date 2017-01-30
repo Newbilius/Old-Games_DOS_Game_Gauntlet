@@ -1,0 +1,104 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <script src="jquery-3.1.1.min.js"></script>
+	
+	<style>
+		body{
+			background-color:#000080;
+			font-size:24px;
+			color: #FFFFFF;
+		} 
+		a {
+			color: #FFFFFF;
+		}
+		ul {
+			padding: 0;
+			list-style-type: none;
+		}
+	</style>
+</head>
+
+<!--<body style="background-color:#000080;color:#ffffff;">-->
+<body>
+<div id=loadingBlock style="text-align:center">
+	Идёт загрузка...
+</div>
+
+<div id=mainBlock style="text-align:center;display:none;">
+	<ul>
+	<li><a href=# id="game1998_2003">1998-2003</a></li>
+	<li><a href=# id="game1996_1997">1996-1997</a></li>
+	<li><a href=# id="game1994_1995">1994-1995</a></li>
+	<li><a href=# id="game1991_1993">1991-1993</a></li>
+	<li><a href=# id="game1989_1990">1989-1990</a></li>
+	<li><a href=# id="game1987_1988">1987-1988</a></li>
+	<li><a href=# id="game1981_1986">1981-1986</a></li>
+	</ul>
+</div>
+
+<div id=gameNameBlock style="text-align:center;">
+	
+</div>
+
+<script>
+$(function() {
+	console.log( "ready!" );
+	var games;
+	
+	$.getJSON( "https://raw.githubusercontent.com/Newbilius/Old-Games_DOS_Game_Gauntlet/master/GAMES.json", 
+		function( data ) {
+			games = data;
+			$("#loadingBlock").hide();
+			$("#mainBlock").show();
+		});
+	
+	$( "#game1998_2003" ).click(function() {
+		showGame(getRandomItem(getGamesByYears(1998,2003)));
+	});
+	
+	$( "#game1996_1997" ).click(function() {
+		showGame(getRandomItem(getGamesByYears(1996,1997)));
+	});
+		
+	$( "#game1994_1995" ).click(function() {
+		showGame(getRandomItem(getGamesByYears(1994,1995)));
+	});
+		
+	$( "#game1991_1993" ).click(function() {
+		showGame(getRandomItem(getGamesByYears(1991,1993)));
+	});
+		
+	$( "#game1989_1990" ).click(function() {
+		showGame(getRandomItem(getGamesByYears(1989,1990)));
+	});
+		
+	$( "#game1987_1988" ).click(function() {
+		showGame(getRandomItem(getGamesByYears(1987,1988)));
+	});
+		
+	$( "#game1981_1986" ).click(function() {
+		showGame(getRandomItem(getGamesByYears(1981,1986)));
+	});
+
+	function showGame(game){
+		$("#gameNameBlock").html("<a target=_blank href=http://www.old-games.ru"+game.Url+">"+game.Name+" ("+game.Year+")</a>");
+	}
+
+	function getGamesByYears(yearFrom,yearTo) {
+		return games.filter(function(x){return x.Year >= yearFrom && x.Year <= yearTo});
+	}
+
+	function getGamesByYear(year) {
+		return games.filter(function(x){return x.Year==i});
+	}
+
+	function getRandomItem(items){
+		var item = items[Math.floor(Math.random()*items.length)];
+		return item;
+	}
+
+});
+</script>
+</body>
+</html>
