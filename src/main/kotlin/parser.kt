@@ -8,7 +8,7 @@ class Game(val Name: String, val Url: String, val Year: String)
 
 fun main(args: Array<String>) {
     val gamesList: MutableList<Game> = mutableListOf()
-    val pagesCount = 3;
+    val pagesCount = 86;
 
     for (page in 1..pagesCount) {
 
