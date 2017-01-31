@@ -1,10 +1,12 @@
 <html>
 <head>
+	<title>DOS Games Exploration</title>
 	<meta charset="utf-8">
     <script src="jquery-3.1.1.min.js"></script>
 	
 	<style>
 		body{
+			font-family:monospace;
 			background-color:#000080;
 			font-size:24px;
 			color: #FFFFFF;
@@ -26,7 +28,7 @@
 </div>
 
 <div id=mainBlock style="text-align:center;display:none;">
-	<ul>
+	<ul id=ranges>
 
 	</ul>
 </div>
@@ -79,7 +81,7 @@ $(function() {
 		{yearFrom:1981, yearTo:1986},
 		];
 		
-	var listItem = $("#mainBlock ul");
+	var listItem = $("#mainBlock ul#ranges");
 	for (index = 0, len = years.length; index < len; ++index) {
 		var yearFrom = years[index].yearFrom;
 		var yearTo = years[index].yearTo;
