@@ -43,15 +43,20 @@
 
 <script>
 $(function() {
-	console.log( "ready!" );
 	var games;
 	
-	$.getJSON( "https://newbilius.github.io/Old-Games_DOS_Game_Gauntlet/GAMES.json", 
-		function( data ) {
-			games = data;
-			$("#loadingBlock").hide();
-			$("#mainBlock").show();
-		});
+	  $.ajax({
+		url: 'https://newbilius.github.io/Old-Games_DOS_Game_Gauntlet/GAMES.json',
+		dataType: 'json',
+		success: function( data ) {
+					games = data;
+					$("#loadingBlock").hide();
+					$("#mainBlock").show();
+		},
+		error: function( data ) {
+					$("#loadingBlock").html("Ошибка деления на огурец. Пожалуйста, перезагрузите страницу и&nbsp;проверьте наличие сети.");
+		}
+	  });
 	
 	$( "#game1998_2003" ).click(function() {
 		showGame(getRandomItem(getGamesByYears(1998,2003)));
