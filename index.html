@@ -18,17 +18,29 @@
 			padding: 0;
 			list-style-type: none;
 		}
+		#yearsList li {
+			display: inline;
+			margin-right: 5px;
+			padding: 3px;
+		}
 	</style>
 </head>
-
-<!--<body style="background-color:#000080;color:#ffffff;">-->
 <body>
 <div id=loadingBlock style="text-align:center">
-	Идёт загрузка...
+	Loading...
 </div>
 
 <div id=mainBlock style="text-align:center;display:none;">
-	<ul id=ranges>
+<span><a href=# id=rangesLink>Ranges</a></span>
+<span><a href=# id=yearsLink>Years</a></span>
+<span><a href=# id=allLink>All</a></span>
+	<ul id=rangesList>
+
+	</ul>
+	<ul id=yearsList style="display:none;">
+
+	</ul>
+	<ul id=allList style="display:none;">
 
 	</ul>
 </div>
@@ -57,6 +69,22 @@ function getRandomItem(items){
 	return item;
 }
 
+function setupLinks(listItem, years){
+	for (index = 0, len = years.length; index < len; ++index) {
+		var yearFrom = years[index].yearFrom;
+		var yearTo = years[index].yearTo;
+		
+		var title=yearFrom+"-"+yearTo;
+		var addStyle="";
+		if (yearFrom == yearTo){
+			title = yearFrom;
+			addStyle = "display:inline-block;";
+		}
+		
+		listItem.append("<li style='"+addStyle+"'><a href=# onclick='showGame(getRandomItem(getGamesByYears("+yearFrom+","+yearTo+")))'>"+title+"</a></li>");
+	}
+}
+
 $(function() {
 	  $.ajax({
 		url: 'https://newbilius.github.io/Old-Games_DOS_Game_Gauntlet/GAMES.json',
@@ -66,12 +94,30 @@ $(function() {
 					$("#loadingBlock").hide();
 					$("#mainBlock").show();
 		},
-		error: function( data ) {
-					$("#loadingBlock").html("Ошибка деления на огурец. Пожалуйста, перезагрузите страницу и&nbsp;проверьте наличие сети.");
+		error: function( data ) { 
+					$("#loadingBlock").html("Error division by cucumber. Please reload the page.");
 		}
 	  });
+	  
+	$( "#rangesLink" ).click(function() {
+		$("#rangesList").show();
+		$("#yearsList").hide();
+		$("#allList").hide();
+	});
+	
+	$( "#yearsLink" ).click(function() {
+		$("#rangesList").hide();
+		$("#yearsList").show();
+		$("#allList").hide();
+	});
+	
+	$( "#allLink" ).click(function() {
+		$("#rangesList").hide();
+		$("#yearsList").hide();
+		$("#allList").show();
+	});
 
-	var years = [
+	var rangeYears = [
 		{yearFrom:1998, yearTo:2003},
 		{yearFrom:1996, yearTo:1997},
 		{yearFrom:1994, yearTo:1995},
@@ -81,13 +127,23 @@ $(function() {
 		{yearFrom:1981, yearTo:1986},
 		];
 		
-	var listItem = $("#mainBlock ul#ranges");
-	for (index = 0, len = years.length; index < len; ++index) {
-		var yearFrom = years[index].yearFrom;
-		var yearTo = years[index].yearTo;
+	var allYearsInOne = [
+		{yearFrom:1981, yearTo:2003}
+		];
 		
-		listItem.append("<li><a href=# onclick='showGame(getRandomItem(getGamesByYears("+yearFrom+","+yearTo+")))'>"+yearFrom+"-"+yearTo+"</a></li>");
-	}
+	var allYears=new Array();
+	
+	for (i=1981; i<=2003; i++)
+		 allYears.push({yearFrom:i, yearTo:i});
+		
+	var listItem = $("#mainBlock ul#rangesList");
+	setupLinks(listItem, rangeYears);
+	
+	listItem = $("#mainBlock ul#yearsList");
+	setupLinks(listItem, allYears);
+	
+	listItem = $("#mainBlock ul#allList");
+	setupLinks(listItem, allYearsInOne);
 });
 </script>
 </body>
