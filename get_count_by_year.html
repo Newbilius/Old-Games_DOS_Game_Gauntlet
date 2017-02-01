@@ -2,15 +2,17 @@
 <head>
     <script src="jquery-3.1.1.min.js"></script>
 </head>
-<body>
+<body id="body">
 <script>
 $(function() {
 	var games;
 	$.getJSON( "https://newbilius.github.io/Old-Games_DOS_Game_Gauntlet/GAMES.json", 
 		function( data ) {
 			games = data;
+			var pageBody=$("#body");
 			for (i=1981;i<2005;i++)
-				console.log(i+" "+data.filter(function(x){return x.Year==i}).length);
+				pageBody.append(i+" "+data.filter(function(x){return x.Year==i}).length+"<br>");
+				//console.log(i+" "+data.filter(function(x){return x.Year==i}).length);
 		});
 
 });

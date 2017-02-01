@@ -32,6 +32,15 @@
 			bottom: 0;
 			right: 0;
 		}
+		#gamesCount{
+			font-size: 30px;
+			padding-bottom: 25px;
+			padding-left: 25px;
+			text-align: left;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+		}
 	</style>
 </head>
 <body>
@@ -58,10 +67,13 @@
 	
 </div>
 
+<div id=gamesCount>
+
+</div>
+
 <div id=information>
 Information about games downloaded from <a href=http://old-games.ru>Old-Games.RU</a></br>
-<a href=https://github.com/Newbilius/Old-Games_DOS_Game_Gauntlet/blob/master/GAMES.json>List of all games in JSON format</a></br>
-<a href=https://github.com/Newbilius/Old-Games_DOS_Game_Gauntlet/blob/master/GAMES.csv>List of all games in CSV format</a></br>
+List of all games in <a href=GAMES.json>JSON</a> and <a href=GAMES.csv>CSV</a></a></br>
 <a href=https://github.com/Newbilius/Old-Games_DOS_Game_Gauntlet>Source code of this page on GitHub</a>
 </div>
 
@@ -109,9 +121,10 @@ $(function() {
 					games = data;
 					$("#loadingBlock").hide();
 					$("#mainBlock").show();
+					$("#gamesCount").html("Games: "+games.length);
 		},
 		error: function( data ) { 
-					$("#loadingBlock").html("Error division by cucumber. Please reload the page.");
+					$("#loadingBlock").html("Error. Please reload the page.");
 		}
 	  });
 	  
