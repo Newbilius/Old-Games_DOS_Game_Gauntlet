@@ -4,6 +4,4 @@
 
 https://newbilius.github.io/Old-Games_DOS_Game_Gauntlet/
 
-База игр связата с сайта http://Old-Games.RU
-
-Парсер сайта написан на Kotlin.
+База игр взята с сайта http://Old-Games.RU, парсер написан на Kotlin.
