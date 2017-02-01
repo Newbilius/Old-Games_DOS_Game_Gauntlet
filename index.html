@@ -41,6 +41,9 @@
 			bottom: 0;
 			left: 0;
 		}
+		#statisticsList{
+			font-size: 17px;
+		}
 	</style>
 </head>
 <body>
@@ -52,6 +55,7 @@
 <span><a href=# id=rangesLink>Ranges</a></span>
 <span><a href=# id=yearsLink>Years</a></span>
 <span><a href=# id=allLink>All</a></span>
+<span><a href=# id=statisticsLink>Statistics</a></span>
 	<ul id=rangesList>
 
 	</ul>
@@ -59,6 +63,10 @@
 
 	</ul>
 	<ul id=allList style="display:none;">
+
+	</ul>
+	
+	<ul id=statisticsList style="display:none;">
 
 	</ul>
 </div>
@@ -72,7 +80,7 @@
 </div>
 
 <div id=information>
-Information about games downloaded from <a href=http://old-games.ru>Old-Games.RU</a></br>
+Information downloaded from <a href=http://old-games.ru>Old-Games.RU</a></br>
 List of all games in <a href=GAMES.json>JSON</a> and <a href=GAMES.csv>CSV</a></a></br>
 <a href=https://github.com/Newbilius/Old-Games_DOS_Game_Gauntlet>Source code of this page on GitHub</a>
 </div>
@@ -122,6 +130,11 @@ $(function() {
 					$("#loadingBlock").hide();
 					$("#mainBlock").show();
 					$("#gamesCount").html("Games: "+games.length);
+				
+					var	statisticsList=$("#statisticsList");
+					statisticsList.append("Games count:<br>");
+					for (i=1981;i<=2003;i++)
+						statisticsList.append(i+" "+data.filter(function(x){return x.Year==i}).length+"<br>");
 		},
 		error: function( data ) { 
 					$("#loadingBlock").html("Error. Please reload the page.");
@@ -132,18 +145,28 @@ $(function() {
 		$("#rangesList").show();
 		$("#yearsList").hide();
 		$("#allList").hide();
+		$("#statisticsList").hide();
 	});
 	
 	$( "#yearsLink" ).click(function() {
 		$("#rangesList").hide();
 		$("#yearsList").show();
 		$("#allList").hide();
+		$("#statisticsList").hide();
 	});
 	
 	$( "#allLink" ).click(function() {
 		$("#rangesList").hide();
 		$("#yearsList").hide();
 		$("#allList").show();
+		$("#statisticsList").hide();
+	});
+	
+	$( "#statisticsLink" ).click(function() {
+		$("#rangesList").hide();
+		$("#yearsList").hide();
+		$("#allList").hide();
+		$("#statisticsList").show();
 	});
 
 	var rangeYears = [
