@@ -4,7 +4,7 @@ import org.jsoup.Jsoup
 import java.io.FileWriter
 import java.io.PrintWriter
 
-class Game(val Name: String, val Url: String, val Year: String)
+class Game(val Name: String, val Genre: String, val Url: String, val Year: String)
 
 fun main(args: Array<String>) {
     val gamesList: MutableList<Game> = mutableListOf()
@@ -18,11 +18,12 @@ fun main(args: Array<String>) {
         for (item in games) {
             if (item.id().contains("game")) {
                 val linkElement = item.getElementsByTag("a").first()
+                val genre = item.child(1).text()
                 val year = item.child(2).text()
                 val title = linkElement.attr("title")
                 val url = linkElement.attr("href")
 
-                gamesList.add(Game(title, url, year))
+                gamesList.add(Game(title, genre, url, year))
             }
         }
         println("Page ${page} of ${pagesCount}")
@@ -39,7 +40,7 @@ fun WriteJson(gamesList: MutableList<Game>) {
 fun WriteCsv(games: List<Game>) {
     val csvWriter = CSVWriter(FileWriter("GAMES.csv", false), ';')
     for (game in games) {
-        csvWriter.writeNext(arrayOf(game.Name, game.Url, game.Year))
+        csvWriter.writeNext(arrayOf(game.Name, game.Genre, game.Url, game.Year))
     }
     csvWriter.close()
 }

@@ -89,7 +89,7 @@ List of all games in <a href=GAMES.json>JSON</a> and <a href=GAMES.csv>CSV</a></
 var games;
 
 function showGame(game){
-	$("#gameNameBlock").html("<a target=_blank href=http://www.old-games.ru"+game.Url+">"+game.Name+" ("+game.Year+")</a>");
+	$("#gameNameBlock").html("<a target=_blank href=http://www.old-games.ru"+game.Url+">"+game.Name+" ("+game.Year+")</a></br>Genre: "+game.Genre);
 }
 
 function getGamesByYears(yearFrom, yearTo) {
