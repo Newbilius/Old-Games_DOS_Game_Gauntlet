@@ -45,11 +45,12 @@ fun enableSSLSocket() {
 
 fun main(args: Array<String>) {
     val gamesList: MutableList<Game> = mutableListOf()
-    val pagesCount = 89;
+    val startPage = 1
+    val pagesCount = 90
 
-    enableSSLSocket();
+    enableSSLSocket()
 
-    for (page in 1..pagesCount) {
+    for (page in startPage..pagesCount) {
 
         val doc = Jsoup.connect("https://www.old-games.ru/catalog/?platform=1&sort=year&page=${page}").get()
         val games = doc.select("table.listtable tr")
