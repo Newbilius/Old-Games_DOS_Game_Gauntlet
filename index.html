@@ -80,9 +80,7 @@
 </div>
 
 <div id=information>
-Information downloaded from <a href=http://old-games.ru>Old-Games.RU</a></br>
-List of all games in <a href=GAMES.json?updated=12042018_1>JSON</a> and <a href=GAMES.csv?updated=05012017_2>CSV</a></a></br>
-<a href=https://github.com/Newbilius/Old-Games_DOS_Game_Gauntlet>Source code of this page on GitHub</a>
+Information parsed from <a href=http://old-games.ru>Old-Games.RU</a></br>
 </div>
 
 <script>
@@ -123,7 +121,7 @@ function setupLinks(listItem, years){
 
 $(function() {
 	  $.ajax({
-		url: 'GAMES.json?updated=12042018_1',
+		url: 'GAMES.json?updated=03_07_2020_1',
 		dataType: 'json',
 		success: function( data ) {
 					games = data;

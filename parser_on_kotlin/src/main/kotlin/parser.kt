@@ -27,7 +27,7 @@ fun enableSSLSocket() {
     })
 
     val context = SSLContext.getInstance("TLS")
-    context.init(null, arrayOf<X509TrustManager>(elements = object : X509TrustManager {
+    context.init(null, arrayOf<X509TrustManager>(elements = *arrayOf(object : X509TrustManager {
         override fun getAcceptedIssuers(): Array<X509Certificate?> {
             return arrayOfNulls<X509Certificate?>(0)
         }
@@ -39,7 +39,7 @@ fun enableSSLSocket() {
         @Throws(CertificateException::class)
         override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
         }
-    }), SecureRandom())
+    })), SecureRandom())
     setDefaultSSLSocketFactory(context.getSocketFactory())
 }
 
