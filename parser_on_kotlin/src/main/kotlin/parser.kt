@@ -46,7 +46,7 @@ fun enableSSLSocket() {
 fun main(args: Array<String>) {
     val gamesList: MutableList<Game> = mutableListOf()
     val startPage = 1
-    val pagesCount = 90
+    val pagesCount = 106
 
     enableSSLSocket()
 
